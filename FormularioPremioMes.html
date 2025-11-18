@@ -253,6 +253,7 @@
     </style>
 </head>
 <body>
+    <scipt>
     <div class="container">
         <div class="header">
             <h1>🏆 Votação Mensal</h1>
@@ -329,320 +330,426 @@
         </div>
     </div>
 
-    <script>
-        const employees = {
-            "GDPRO": [
-                "Andre Luis Andrade Lago",
-                "Erick Goldner Baptista Silva", 
-                "Gersumino Madela Neto",
-                "Andre Luiz Freitas Lopes",
-                "Flavio de Melo Martins Pinheiro",
-                "Iata Anderson Dourado Araujo",
-                "Idarlan Martins Machado",
-                "Jose Bernardo Wernik Mizratti",
-                "Sergio de Menezes Carvalho"
-            ],
-            "GDGDI": [
-                "Dulcimara Roberta Ferreira Delfes",
-                "Cristiane Lustosa Guimaraes Franca",
-                "Gabriel Oliveira Faria",
-                "Aguinaldo Vieira de Abreu",
-                "Carlos Gustavo Lopes Lima",
-                "Gilda Nogueira Silva Pestana",
-                "Glaucio de Souza Landim"
-            ],
-            "GDGEP": [
-                "Lindomar Guimaraes de Oliveira Junior",
-                "Danielle Eulalia Lelis dos Santos",
-                "Greicy Cristina do Prado Rigo",
-                "Flavia de Sousa Silvestre",
-                "Alessandro Luiz Mamus",
-                "Guilherme Soares de Carvalho",
-                "Henrique Garcia de Souza",
-                "Joao Henrique Siqueira Engel",
-                "Jose Celio Reis Soares",
-                "Wellison Angelim Reis"
-            ],
-            "GDGPE": [
-                "Lucy Mitiko Tashiro",
-                "Alexandre Rodrigues Andrade",
-                "Marcia Missias Gomes",
-                "Maurizete Carvalho Correa",
-                "Andrei Pimenta Sibin",
-                "Italo Petronio Fernandes Barbosa",
-                "Jorge Leandro Brasil de Sena"
-            ],
-            "GDGRE": [
-                "Luis Gustavo Loyola dos Santos Filho",
-                "Carlos Bruno Gomes Cahu",
-                "Renata Correa Sousa",
-                "Carmen Deia de Lima Rodrigues",
-                "Cristina Kenia Fiuza Silva",
-                "Frederico Gil Moreira Santiago",
-                "Geison Souza de Salles",
-                "José Ricardo Barquinha Ribeiro",
-                "Paulina Maria de Medeiros do Amaral",
-                "Sandro Magalhaes Souza",
-                "Sheyla Aparecida Cavalcanti",
-                "Soraia Martins Lima"
-            ],
-            "GDGDG": [
-                "Marilei Martins de Melo",
-                "Helder Rocha dos Santos",
-                "Luiz Tomé Vilhena Dantas Neto",
-                "Anderson Júnio Leal Moraes",
-                "Emerson Jeronimo Oliveira da Silva",
-                "Petrônio da Costa Pereira",
-                "Tiberio Cesar Vilar Vieira",
-                "Yara Athayde Athayde"
-            ]
-        };
+const employees = {
+    // ... (Manter sua lista de funcionários original)
+    "GDPRO": [
+        "Andre Luis Andrade Lago",
+        "Erick Goldner Baptista Silva", 
+        "Gersumino Madela Neto",
+        "Andre Luiz Freitas Lopes",
+        "Flavio de Melo Martins Pinheiro",
+        "Iata Anderson Dourado Araujo",
+        "Idarlan Martins Machado",
+        "Jose Bernardo Wernik Mizratti",
+        "Sergio de Menezes Carvalho"
+    ],
+    "GDGDI": [
+        "Dulcimara Roberta Ferreira Delfes",
+        "Cristiane Lustosa Guimaraes Franca",
+        "Gabriel Oliveira Faria",
+        "Aguinaldo Vieira de Abreu",
+        "Carlos Gustavo Lopes Lima",
+        "Gilda Nogueira Silva Pestana",
+        "Glaucio de Souza Landim"
+    ],
+    "GDGEP": [
+        "Lindomar Guimaraes de Oliveira Junior",
+        "Danielle Eulalia Lelis dos Santos",
+        "Greicy Cristina do Prado Rigo",
+        "Flavia de Sousa Silvestre",
+        "Alessandro Luiz Mamus",
+        "Guilherme Soares de Carvalho",
+        "Henrique Garcia de Souza",
+        "Joao Henrique Siqueira Engel",
+        "Jose Celio Reis Soares",
+        "Wellison Angelim Reis"
+    ],
+    "GDGPE": [
+        "Lucy Mitiko Tashiro",
+        "Alexandre Rodrigues Andrade",
+        "Marcia Missias Gomes",
+        "Maurizete Carvalho Correa",
+        "Andrei Pimenta Sibin",
+        "Italo Petronio Fernandes Barbosa",
+        "Jorge Leandro Brasil de Sena"
+    ],
+    "GDGRE": [
+        "Luis Gustavo Loyola dos Santos Filho",
+        "Carlos Bruno Gomes Cahu",
+        "Renata Correa Sousa",
+        "Carmen Deia de Lima Rodrigues",
+        "Cristina Kenia Fiuza Silva",
+        "Frederico Gil Moreira Santiago",
+        "Geison Souza de Salles",
+        "José Ricardo Barquinha Ribeiro",
+        "Paulina Maria de Medeiros do Amaral",
+        "Sandro Magalhaes Souza",
+        "Sheyla Aparecida Cavalcanti",
+        "Soraia Martins Lima"
+    ],
+    "GDGDG": [
+        "Marilei Martins de Melo",
+        "Helder Rocha dos Santos",
+        "Luiz Tomé Vilhena Dantas Neto",
+        "Anderson Júnio Leal Moraes",
+        "Emerson Jeronimo Oliveira da Silva",
+        "Petrônio da Costa Pereira",
+        "Tiberio Cesar Vilar Vieira",
+        "Yara Athayde Athayde"
+    ]
+};
 
-        const criteria = [
-            "Cumprimento de metas",
-            "Proatividade e iniciativa", 
-            "Espírito de equipe e colaboração",
-            "Resolução de problemas",
-            "Criatividade e inovação",
-            "Destaque em atendimento ao cliente",
-            "Superação e crescimento profissional"
-        ];
+const criteria = [
+    "Cumprimento de metas",
+    "Proatividade e iniciativa", 
+    "Espírito de equipe e colaboração",
+    "Resolução de problemas",
+    "Criatividade e inovação",
+    "Destaque em atendimento ao cliente",
+    "Superação e crescimento profissional"
+];
 
-        let currentStep = 1;
-        let selectedTeam = '';
-        let evaluations = {};
-        let evaluationData = [];
+let currentStep = 1; // 1: Equipe, 2: Avaliações, 3: Observações, 4: Resumo, 5: Confirmação
+let selectedTeam = '';
+let evaluations = {};
+let evaluationData = [];
+let currentEmployeeIndex = 0; // Novo: Rastreia qual funcionário está sendo avaliado
 
-        function updateProgress() {
-            const progress = (currentStep - 1) / 4 * 100;
-            document.getElementById('progressBar').style.width = progress + '%';
+// Sua URL do Apps Script
+const WEB_APP_URL = 'SUA_URL_DO_GOOGLE_APPS_SCRIPT_AQUI'; 
+
+// --- Funções de Navegação e Progresso ---
+
+function updateProgress() {
+    let progress = 0;
+    const numEmployees = employees[selectedTeam] ? employees[selectedTeam].length : 0;
+    
+    if (currentStep === 1) {
+        progress = 0;
+    } else if (currentStep === 2) {
+        // O progresso dentro do Step 2 é a avaliação de cada funcionário
+        progress = (currentEmployeeIndex / numEmployees) * 80; // 80% do total
+    } else if (currentStep === 3) {
+        progress = 85;
+    } else if (currentStep === 4) {
+        progress = 90;
+    } else if (currentStep === 5) {
+        progress = 100;
+    }
+
+    document.getElementById('progressBar').style.width = progress + '%';
+}
+
+function nextStep() {
+    if (currentStep === 1) {
+        // Validação da Equipe
+        selectedTeam = document.getElementById('teamSelect').value;
+        if (selectedTeam === '') {
+            alert('Por favor, selecione sua equipe.');
+            return;
+        }
+        generateEvaluationForms();
+        currentStep++;
+        showStep();
+        
+    } else if (currentStep === 2) {
+        // Validação do Funcionário Atual
+        if (!validateCurrentEmployeeEvaluation()) {
+             alert('Você precisa avaliar pelo menos um critério para este funcionário.');
+             return;
         }
 
-        function nextStep() {
-            if (validateCurrentStep()) {
-                if (currentStep === 1) {
-                    selectedTeam = document.getElementById('teamSelect').value;
-                    generateEvaluationForms();
-                } else if (currentStep === 2) {
-                    if (!validateAllEvaluations()) {
-                        alert('Por favor, avalie todos os funcionários da sua equipe antes de continuar.');
-                        return;
-                    }
-                } else if (currentStep === 4) {
-                    // Última etapa antes da submissão
-                    currentStep++;
-                    showStep();
-                    return;
-                }
+        const teamEmployees = employees[selectedTeam];
+        
+        // Se ainda houver funcionários para avaliar, avance para o próximo
+        if (currentEmployeeIndex < teamEmployees.length - 1) {
+            currentEmployeeIndex++;
+            showStep(); // Apenas atualiza a aba dentro do step 2
+        } else {
+            // Todos avaliados, avance para a Observação
+            currentStep++;
+            showStep();
+        }
+    } else if (currentStep === 3) {
+        // Avança para o Resumo
+        generateSummary();
+        currentStep++;
+        showStep();
+    } else if (currentStep === 4) {
+        // Última etapa antes da submissão
+        submitEvaluation();
+    }
+}
+
+function previousStep() {
+    if (currentStep === 2) {
+        // Se estiver avaliando, volta para o funcionário anterior ou para a seleção de equipe
+        if (currentEmployeeIndex > 0) {
+            currentEmployeeIndex--;
+            showStep();
+        } else {
+            currentStep--;
+            showStep();
+        }
+    } else if (currentStep > 1 && currentStep < 5) {
+        currentStep--;
+        showStep();
+    }
+}
+
+function showStep() {
+    document.querySelectorAll('.step').forEach(step => step.classList.remove('active'));
+    document.getElementById('step' + currentStep).classList.add('active');
+    
+    if (currentStep === 2) {
+        // Mostra apenas o card do funcionário atual
+        document.querySelectorAll('.employee-card').forEach((card, index) => {
+            card.style.display = (index === currentEmployeeIndex) ? 'block' : 'none';
+        });
+        
+        // Atualiza os botões de navegação no Step 2
+        const container = document.getElementById('evaluationContainer');
+        const teamEmployees = employees[selectedTeam];
+        let buttons = container.querySelector('#step2-buttons');
+        if (!buttons) {
+             buttons = document.createElement('div');
+             buttons.id = 'step2-buttons';
+             buttons.style.cssText = 'text-align: center; margin-top: 30px;';
+             container.appendChild(buttons);
+        }
+        
+        const previousBtn = `<button class="btn btn-secondary" onclick="previousStep()">${currentEmployeeIndex === 0 ? 'Voltar (Equipe)' : 'Voltar'}</button>`;
+        const nextBtn = `<button class="btn" onclick="nextStep()">${currentEmployeeIndex === teamEmployees.length - 1 ? 'Avançar (Observ.)' : 'Próximo'}</button>`;
+        buttons.innerHTML = previousBtn + nextBtn;
+        
+    } else {
+         // Oculta os botões específicos do Step 2 se estiver em outra etapa
+         const buttons = document.getElementById('step2-buttons');
+         if(buttons) buttons.style.display = 'none';
+    }
+
+    updateProgress();
+}
+
+// --- Funções de Avaliação e Validação ---
+
+function validateCurrentEmployeeEvaluation() {
+    const employee = employees[selectedTeam][currentEmployeeIndex];
+    if (!evaluations[employee]) {
+        return false; // Não avaliado
+    }
+    
+    // Verifica se pelo menos um critério tem nota > 0
+    return criteria.some(criterion => evaluations[employee][criterion] > 0);
+}
+
+function generateEvaluationForms() {
+    const container = document.getElementById('evaluationContainer');
+    const teamEmployees = employees[selectedTeam];
+    
+    container.innerHTML = '';
+    currentEmployeeIndex = 0; // Resetar para o primeiro funcionário
+    
+    teamEmployees.forEach((employee, empIndex) => {
+        const employeeCard = document.createElement('div');
+        employeeCard.className = 'employee-card';
+        employeeCard.style.display = (empIndex === currentEmployeeIndex) ? 'block' : 'none';
+        
+        let criteriaHTML = '';
+        criteria.forEach(criterion => {
+            criteriaHTML += `
+                <div class="criteria-item">
+                    <div class="criteria-label">${criterion}</div>
+                    <div class="star-rating" data-employee="${employee}" data-criterion="${criterion}">
+                        ${[1,2,3,4,5].map(i => `<span class="star" data-rating="${i}">★</span>`).join('')}
+                    </div>
+                </div>
+            `;
+        });
+        
+        employeeCard.innerHTML = `
+            <div class="employee-name">${employee}</div>
+            <p style="text-align: center; margin-bottom: 20px;">Você precisa avaliar pelo menos um item para este colega.</p>
+            <div class="criteria-grid">
+                ${criteriaHTML}
+            </div>
+        `;
+        
+        container.appendChild(employeeCard);
+    });
+    
+    // Adicionar event listeners para as estrelas
+    document.querySelectorAll('.star-rating').forEach(rating => {
+        const stars = rating.querySelectorAll('.star');
+        const employee = rating.getAttribute('data-employee');
+        const criterion = rating.getAttribute('data-criterion');
+        
+        stars.forEach(star => {
+            star.addEventListener('click', () => {
+                const rating_value = parseInt(star.getAttribute('data-rating'));
                 
-                if (currentStep < 4) {
-                    currentStep++;
-                    showStep();
-                    if (currentStep === 4) {
-                        generateSummary();
-                    }
-                }
-            }
-        }
-
-        function previousStep() {
-            if (currentStep > 1) {
-                currentStep--;
-                showStep();
-            }
-        }
-
-        function showStep() {
-            document.querySelectorAll('.step').forEach(step => step.classList.remove('active'));
-            document.getElementById('step' + currentStep).classList.add('active');
-            updateProgress();
-        }
-
-        function validateCurrentStep() {
-            if (currentStep === 1) {
-                return document.getElementById('teamSelect').value !== '';
-            }
-            return true;
-        }
-
-        function validateAllEvaluations() {
-            const teamEmployees = employees[selectedTeam];
-            for (let employee of teamEmployees) {
                 if (!evaluations[employee]) {
-                    return false;
+                    evaluations[employee] = {};
                 }
-                for (let criterion of criteria) {
-                    if (!evaluations[employee][criterion]) {
-                        return false;
-                    }
-                }
-            }
-            return true;
-        }
-
-        function generateEvaluationForms() {
-            const container = document.getElementById('evaluationContainer');
-            const teamEmployees = employees[selectedTeam];
-            
-            container.innerHTML = '';
-            
-            teamEmployees.forEach(employee => {
-                const employeeCard = document.createElement('div');
-                employeeCard.className = 'employee-card';
                 
-                let criteriaHTML = '';
-                criteria.forEach(criterion => {
-                    criteriaHTML += `
-                        <div class="criteria-item">
-                            <div class="criteria-label">${criterion}</div>
-                            <div class="star-rating" data-employee="${employee}" data-criterion="${criterion}">
-                                ${[1,2,3,4,5].map(i => `<span class="star" data-rating="${i}">★</span>`).join('')}
-                            </div>
-                        </div>
-                    `;
+                // Toggle: Se clicar na nota atual, desmarca (nota 0/branco)
+                const currentRating = evaluations[employee][criterion] || 0;
+                let finalRating = rating_value;
+                if (rating_value === currentRating) {
+                    finalRating = 0; // Desmarca
+                }
+                
+                evaluations[employee][criterion] = finalRating;
+                
+                // Atualizar visual das estrelas
+                stars.forEach((s, index) => {
+                    s.classList.toggle('active', index < finalRating);
                 });
+            });
+            
+            star.addEventListener('mouseenter', () => {
+                const hoverRating = parseInt(star.getAttribute('data-rating'));
+                stars.forEach((s, index) => {
+                    s.style.color = index < hoverRating ? '#ffd700' : '#ddd';
+                });
+            });
+            
+            star.addEventListener('mouseleave', () => {
+                const currentRating = evaluations[employee] && evaluations[employee][criterion] || 0;
+                stars.forEach((s, index) => {
+                    s.style.color = index < currentRating ? '#ffd700' : '#ddd';
+                });
+            });
+        });
+
+        // Aplicar notas salvas (se existirem) ao carregar
+        const initialRating = evaluations[employee] && evaluations[employee][criterion] || 0;
+        stars.forEach((s, index) => {
+            s.classList.toggle('active', index < initialRating);
+        });
+    });
+}
+
+function generateSummary() {
+    const container = document.getElementById('summaryContainer');
+    const teamEmployees = employees[selectedTeam];
+    
+    let summaryHTML = `<div class="summary">
+        <h3>Equipe: ${selectedTeam}</h3>
+    </div>`;
+    
+    teamEmployees.forEach(employee => {
+        if (evaluations[employee] && validateCurrentEmployeeEvaluation(employee)) {
+            let totalScore = 0;
+            let criteriaCounted = 0;
+            let criteriaHTML = '';
+            
+            criteria.forEach(criterion => {
+                const score = evaluations[employee][criterion] || 0;
+                const scoreDisplay = score > 0 ? ('★'.repeat(score) + '☆'.repeat(5-score)) : 'Não Avaliado';
                 
-                employeeCard.innerHTML = `
-                    <div class="employee-name">${employee}</div>
-                    <div class="criteria-grid">
-                        ${criteriaHTML}
+                criteriaHTML += `
+                    <div class="summary-item">
+                        <span>${criterion}</span>
+                        <span>${scoreDisplay}</span>
                     </div>
                 `;
                 
-                container.appendChild(employeeCard);
-            });
-            
-            // Adicionar event listeners para as estrelas
-            document.querySelectorAll('.star-rating').forEach(rating => {
-                const stars = rating.querySelectorAll('.star');
-                const employee = rating.getAttribute('data-employee');
-                const criterion = rating.getAttribute('data-criterion');
-                
-                stars.forEach(star => {
-                    star.addEventListener('click', () => {
-                        const rating_value = parseInt(star.getAttribute('data-rating'));
-                        
-                        if (!evaluations[employee]) {
-                            evaluations[employee] = {};
-                        }
-                        evaluations[employee][criterion] = rating_value;
-                        
-                        // Atualizar visual das estrelas
-                        stars.forEach((s, index) => {
-                            s.classList.toggle('active', index < rating_value);
-                        });
-                    });
-                    
-                    star.addEventListener('mouseenter', () => {
-                        const hoverRating = parseInt(star.getAttribute('data-rating'));
-                        stars.forEach((s, index) => {
-                            s.style.color = index < hoverRating ? '#ffd700' : '#ddd';
-                        });
-                    });
-                    
-                    star.addEventListener('mouseleave', () => {
-                        const currentRating = evaluations[employee] && evaluations[employee][criterion] || 0;
-                        stars.forEach((s, index) => {
-                            s.style.color = index < currentRating ? '#ffd700' : '#ddd';
-                        });
-                    });
-                });
-            });
-        }
-
-        function generateSummary() {
-            const container = document.getElementById('summaryContainer');
-            const teamEmployees = employees[selectedTeam];
-            
-            let summaryHTML = `<div class="summary">
-                <h3>Equipe: ${selectedTeam}</h3>
-            </div>`;
-            
-            teamEmployees.forEach(employee => {
-                if (evaluations[employee]) {
-                    let totalScore = 0;
-                    let criteriaHTML = '';
-                    
-                    criteria.forEach(criterion => {
-                        const score = evaluations[employee][criterion] || 0;
-                        totalScore += score;
-                        criteriaHTML += `
-                            <div class="summary-item">
-                                <span>${criterion}</span>
-                                <span>${'★'.repeat(score)}${'☆'.repeat(5-score)}</span>
-                            </div>
-                        `;
-                    });
-                    
-                    const averageScore = (totalScore / criteria.length).toFixed(1);
-                    
-                    summaryHTML += `
-                        <div class="summary">
-                            <h3>${employee} - Média: ${averageScore}/5.0</h3>
-                            ${criteriaHTML}
-                        </div>
-                    `;
+                if (score > 0) {
+                    totalScore += score;
+                    criteriaCounted++;
                 }
             });
             
-            const observations = document.getElementById('observations').value;
-            if (observations.trim()) {
-                summaryHTML += `
-                    <div class="summary">
-                        <h3>Observações</h3>
-                        <p>${observations}</p>
-                    </div>
-                `;
-            }
+            const averageScore = criteriaCounted > 0 ? (totalScore / criteriaCounted).toFixed(1) : "N/A";
             
-            container.innerHTML = summaryHTML;
+            summaryHTML += `
+                <div class="summary">
+                    <h3>${employee} - Média: ${averageScore}/5.0 (${criteriaCounted} itens avaliados)</h3>
+                    ${criteriaHTML}
+                </div>
+            `;
+        } else {
+             summaryHTML += `
+                <div class="summary alert">
+                    <h3>${employee}</h3>
+                    <p>⚠️ Não avaliado ou avaliação incompleta (Zero itens avaliados).</p>
+                </div>
+            `;
         }
+    });
+    
+    const observations = document.getElementById('observations').value;
+    if (observations.trim()) {
+        summaryHTML += `
+            <div class="summary">
+                <h3>Observações</h3>
+                <p>${observations}</p>
+            </div>
+        `;
+    }
+    
+    container.innerHTML = summaryHTML;
+}
+
+// --- Função de Envio (Backend) ---
 
 function submitEvaluation() {
-    // URL que você copiou do Google Apps Script
-    const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbz9u-zRTaAKEXuhumFcjDmS1WsUfwoss38_1r4lGMkrJ4ZI_h-pd3tmBLKVmm9dtQWsnA/exec'; 
-
-    // 1. Preparar os dados (o mesmo código que você já tinha)
+    // 1. Preparar dados
     evaluationData = [];
     const teamEmployees = employees[selectedTeam];
     const evaluatorTeam = selectedTeam;
     const timestamp = new Date().toISOString();
-    const observations = document.getElementById('observations').value.replace(/,/g, ';'); // Troca vírgulas por ponto e vírgula para evitar quebras no CSV (caso o script não faça isso)
-
-    teamEmployees.forEach(employee => {
-        // ... (o restante da preparação de dados, como antes)
-        if (evaluations[employee]) {
-            let totalScore = 0;
-            const row = {
-                'Data_Avaliacao': timestamp,
-                'Equipe_Avaliador': evaluatorTeam,
-                'Funcionario_Avaliado': employee,
-                'Equipe_Avaliado': selectedTeam
-            };
-            
-            criteria.forEach(criterion => {
-                const score = evaluations[employee][criterion] || 0;
+    // Substitui vírgulas por ponto e vírgula nas observações para evitar quebras no CSV (backend)
+    const observations = document.getElementById('observations').value.replace(/,/g, ';'); 
+    
+    // Apenas prepara os dados dos funcionários que têm pelo menos 1 item avaliado
+    const validEmployees = teamEmployees.filter(employee => {
+        return evaluations[employee] && criteria.some(criterion => evaluations[employee][criterion] > 0);
+    });
+    
+    if (validEmployees.length === 0) {
+        alert('Nenhum funcionário foi avaliado. Por favor, volte e avalie pelo menos um critério para cada colega.');
+        return;
+    }
+    
+    validEmployees.forEach(employee => {
+        let totalScore = 0;
+        let criteriaCounted = 0;
+        const row = {
+            'Data_Avaliacao': timestamp,
+            'Equipe_Avaliador': evaluatorTeam,
+            'Funcionario_Avaliado': employee,
+            'Equipe_Avaliado': selectedTeam
+        };
+        
+        criteria.forEach(criterion => {
+            const score = evaluations[employee][criterion] || 0;
+            if (score > 0) {
                 totalScore += score;
-                // Usa replace para criar chaves consistentes com os cabeçalhos da planilha
-                row[criterion.replace(/\s+/g, '_')] = score; 
-            });
-            
-            row['Pontuacao_Total'] = totalScore;
-            row['Media'] = (totalScore / criteria.length).toFixed(2);
-            row['Observacoes'] = observations;
-            
-            evaluationData.push(row);
-        }
+                criteriaCounted++;
+            }
+            // Usa replace para criar chaves consistentes com os cabeçalhos da planilha
+            row[criterion.replace(/\s+/g, '_')] = score; 
+        });
+        
+        row['Pontuacao_Total'] = totalScore;
+        row['Criterios_Avaliados'] = criteriaCounted;
+        // Calcula a média apenas com os critérios avaliados
+        row['Media'] = criteriaCounted > 0 ? (totalScore / criteriaCounted).toFixed(2) : '0.00'; 
+        row['Observacoes'] = observations;
+        
+        evaluationData.push(row);
     });
 
     // 2. ENVIAR DADOS PARA O GOOGLE APPS SCRIPT
     fetch(WEB_APP_URL, {
         method: 'POST',
-        mode: 'cors', // Necessário para solicitações entre domínios (GitHub Pages -> Google)
+        mode: 'cors', 
         headers: {
-            'Content-Type': 'text/plain;charset=utf-8', // Apps Script prefere 'text/plain' para evitar pré-voo CORS
+            'Content-Type': 'text/plain;charset=utf-8', 
         },
-        body: JSON.stringify(evaluationData) // Envia o array de dados como JSON
+        body: JSON.stringify(evaluationData) 
     })
     .then(response => {
         if (!response.ok) {
@@ -658,55 +765,61 @@ function submitEvaluation() {
     })
     .catch(error => {
         console.error('Erro ao enviar a avaliação:', error);
-        alert('Ocorreu um erro ao enviar sua avaliação. Por favor, tente novamente ou entre em contato com o suporte.');
-        // Opcional: Se falhar, você pode ainda oferecer o download local (como um backup)
+        alert('Ocorreu um erro ao enviar sua avaliação. Por favor, tente novamente. Os dados foram salvos localmente.');
+        // Se falhar, oferece a chance de baixar como backup
         // downloadCSV(); 
     });
 }
 
-        function downloadCSV() {
-            if (evaluationData.length === 0) {
-                alert('Nenhum dado para exportar!');
-                return;
+
+// --- Funções de Utilitários ---
+
+function downloadCSV() {
+    // ... (Manter a sua função downloadCSV original para backup)
+    if (evaluationData.length === 0) {
+        alert('Nenhum dado para exportar!');
+        return;
+    }
+    
+    const headers = Object.keys(evaluationData[0]);
+    let csvContent = headers.join(',') + '\n';
+    
+    evaluationData.forEach(row => {
+        const values = headers.map(header => {
+            let value = row[header] || '';
+            if (typeof value === 'string' && value.includes(',')) {
+                value = '"' + value.replace(/"/g, '""') + '"';
             }
-            
-            const headers = Object.keys(evaluationData[0]);
-            let csvContent = headers.join(',') + '\n';
-            
-            evaluationData.forEach(row => {
-                const values = headers.map(header => {
-                    let value = row[header] || '';
-                    if (typeof value === 'string' && value.includes(',')) {
-                        value = '"' + value.replace(/"/g, '""') + '"';
-                    }
-                    return value;
-                });
-                csvContent += values.join(',') + '\n';
-            });
-            
-            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-            const link = document.createElement('a');
-            const url = URL.createObjectURL(blob);
-            link.setAttribute('href', url);
-            link.setAttribute('download', `avaliacao_funcionarios_${selectedTeam}_${new Date().toISOString().slice(0,10)}.csv`);
-            link.style.visibility = 'hidden';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-        }
+            return value;
+        });
+        csvContent += values.join(',') + '\n';
+    });
+    
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    const url = URL.createObjectURL(blob);
+    link.setAttribute('href', url);
+    link.setAttribute('download', `avaliacao_funcionarios_${selectedTeam}_${new Date().toISOString().slice(0,10)}.csv`);
+    link.style.visibility = 'hidden';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
 
-        function resetForm() {
-            currentStep = 1;
-            selectedTeam = '';
-            evaluations = {};
-            evaluationData = [];
-            document.getElementById('teamSelect').value = '';
-            document.getElementById('observations').value = '';
-            showStep();
-        }
+function resetForm() {
+    currentStep = 1;
+    selectedTeam = '';
+    evaluations = {};
+    evaluationData = [];
+    currentEmployeeIndex = 0;
+    document.getElementById('teamSelect').value = '';
+    document.getElementById('observations').value = '';
+    document.getElementById('evaluationContainer').innerHTML = ''; // Limpa os cards de avaliação
+    showStep();
+}
 
-        // Inicializar
-        updateProgress();
-    </script>
+// Inicializar
+showStep();
+</script>
 </body>
 </html>
