@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Votação - Melhor Funcionário do Mês</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c5aa0 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .form-content {
+            padding: 40px;
+        }
+
+        .step {
+            display: none;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .step.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+            font-size: 1.1rem;
+        }
+
+        select, textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e1e8ed;
+            border-radius: 12px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        select:focus, textarea:focus {
+            border-color: #667eea;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .employee-card {
+            background: #f8f9ff;
+            border: 2px solid #e1e8ed;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .employee-card:hover {
+            border-color: #667eea;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .employee-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #2c5aa0;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .criteria-grid {
+            display: grid;
+            gap: 20px;
+        }
+
+        .criteria-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+            border: 1px solid #e1e8ed;
+        }
+
+        .criteria-label {
+            font-weight: 600;
+            color: #333;
+            flex: 1;
+        }
+
+        .star-rating {
+            display: flex;
+            gap: 5px;
+        }
+
+        .star {
+            font-size: 24px;
+            color: #ddd;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .star:hover, .star.active {
+            color: #ffd700;
+            transform: scale(1.1);
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-right: 10px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
+        }
+
+        .progress {
+            background: #e1e8ed;
+            border-radius: 10px;
+            height: 8px;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 100%;
+            transition: width 0.3s ease;
+            border-radius: 10px;
+        }
+
+        .summary {
+            background: #f8f9ff;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+
+        .summary h3 {
+            color: #2c5aa0;
+            margin-bottom: 15px;
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #e1e8ed;
+        }
+
+        .summary-item:last-child {
+            border-bottom: none;
+        }
+
+        .alert {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            color: #856404;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .success {
+            background: #d1edff;
+            border-color: #74b9ff;
+            color: #0984e3;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .form-content {
+                padding: 20px;
+            }
+            
+            .criteria-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏆 Votação Mensal</h1>
+            <p>Melhor Funcionário do Mês</p>
+        </div>
+
+        <div class="form-content">
+            <div class="progress">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+
+            <!-- Etapa 1: Seleção da Equipe -->
+            <div class="step active" id="step1">
+                <h2 style="margin-bottom: 30px; color: #2c5aa0;">Selecione sua Equipe</h2>
+                <div class="form-group">
+                    <label for="teamSelect">Qual é a sua equipe?</label>
+                    <select id="teamSelect" required>
+                        <option value="">Selecione sua equipe...</option>
+                        <option value="GDPRO">GDPRO</option>
+                        <option value="GDGDI">GDGDI</option>
+                        <option value="GDGEP">GDGEP</option>
+                        <option value="GDGPE">GDGPE</option>
+                        <option value="GDGRE">GDGRE</option>
+                        <option value="GDGDG">GDGDG</option>
+                    </select>
+                </div>
+                <button class="btn" onclick="nextStep()">Próximo</button>
+            </div>
+
+            <!-- Etapa 2: Avaliações -->
+            <div class="step" id="step2">
+                <h2 style="margin-bottom: 30px; color: #2c5aa0;">Avalie seus Colegas de Equipe</h2>
+                <div id="evaluationContainer"></div>
+                <div style="text-align: center; margin-top: 30px;">
+                    <button class="btn btn-secondary" onclick="previousStep()">Voltar</button>
+                    <button class="btn" onclick="nextStep()">Próximo</button>
+                </div>
+            </div>
+
+            <!-- Etapa 3: Observações -->
+            <div class="step" id="step3">
+                <h2 style="margin-bottom: 30px; color: #2c5aa0;">Observações e Justificativas</h2>
+                <div class="form-group">
+                    <label for="observations">Observações gerais sobre as avaliações (opcional):</label>
+                    <textarea id="observations" rows="6" placeholder="Compartilhe suas observações sobre o desempenho dos colegas avaliados..."></textarea>
+                </div>
+                <div style="text-align: center; margin-top: 30px;">
+                    <button class="btn btn-secondary" onclick="previousStep()">Voltar</button>
+                    <button class="btn" onclick="nextStep()">Revisar</button>
+                </div>
+            </div>
+
+            <!-- Etapa 4: Resumo -->
+            <div class="step" id="step4">
+                <h2 style="margin-bottom: 30px; color: #2c5aa0;">Resumo da Avaliação</h2>
+                <div id="summaryContainer"></div>
+                <div style="text-align: center; margin-top: 30px;">
+                    <button class="btn btn-secondary" onclick="previousStep()">Voltar</button>
+                    <button class="btn" onclick="submitEvaluation()">Finalizar Avaliação</button>
+                </div>
+            </div>
+
+            <!-- Etapa 5: Confirmação -->
+            <div class="step" id="step5">
+                <div class="alert success">
+                    <h3>✅ Avaliação Enviada com Sucesso!</h3>
+                    <p>Sua avaliação foi registrada. Clique no botão abaixo para baixar os dados em CSV.</p>
+                </div>
+                <div style="text-align: center;">
+                    <button class="btn" onclick="downloadCSV()">📥 Baixar Dados (CSV)</button>
+                    <button class="btn btn-secondary" onclick="resetForm()">Nova Avaliação</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const employees = {
+            "GDPRO": [
+                "Andre Luis Andrade Lago",
+                "Erick Goldner Baptista Silva", 
+                "Gersumino Madela Neto",
+                "Andre Luiz Freitas Lopes",
+                "Flavio de Melo Martins Pinheiro",
+                "Iata Anderson Dourado Araujo",
+                "Idarlan Martins Machado",
+                "Jose Bernardo Wernik Mizratti",
+                "Sergio de Menezes Carvalho"
+            ],
+            "GDGDI": [
+                "Dulcimara Roberta Ferreira Delfes",
+                "Cristiane Lustosa Guimaraes Franca",
+                "Gabriel Oliveira Faria",
+                "Aguinaldo Vieira de Abreu",
+                "Carlos Gustavo Lopes Lima",
+                "Gilda Nogueira Silva Pestana",
+                "Glaucio de Souza Landim"
+            ],
+            "GDGEP": [
+                "Lindomar Guimaraes de Oliveira Junior",
+                "Danielle Eulalia Lelis dos Santos",
+                "Greicy Cristina do Prado Rigo",
+                "Flavia de Sousa Silvestre",
+                "Alessandro Luiz Mamus",
+                "Guilherme Soares de Carvalho",
+                "Henrique Garcia de Souza",
+                "Joao Henrique Siqueira Engel",
+                "Jose Celio Reis Soares",
+                "Wellison Angelim Reis"
+            ],
+            "GDGPE": [
+                "Lucy Mitiko Tashiro",
+                "Alexandre Rodrigues Andrade",
+                "Marcia Missias Gomes",
+                "Maurizete Carvalho Correa",
+                "Andrei Pimenta Sibin",
+                "Italo Petronio Fernandes Barbosa",
+                "Jorge Leandro Brasil de Sena"
+            ],
+            "GDGRE": [
+                "Luis Gustavo Loyola dos Santos Filho",
+                "Carlos Bruno Gomes Cahu",
+                "Renata Correa Sousa",
+                "Carmen Deia de Lima Rodrigues",
+                "Cristina Kenia Fiuza Silva",
+                "Frederico Gil Moreira Santiago",
+                "Geison Souza de Salles",
+                "José Ricardo Barquinha Ribeiro",
+                "Paulina Maria de Medeiros do Amaral",
+                "Sandro Magalhaes Souza",
+                "Sheyla Aparecida Cavalcanti",
+                "Soraia Martins Lima"
+            ],
+            "GDGDG": [
+                "Marilei Martins de Melo",
+                "Helder Rocha dos Santos",
+                "Luiz Tomé Vilhena Dantas Neto",
+                "Anderson Júnio Leal Moraes",
+                "Emerson Jeronimo Oliveira da Silva",
+                "Petrônio da Costa Pereira",
+                "Tiberio Cesar Vilar Vieira",
+                "Yara Athayde Athayde"
+            ]
+        };
+
+        const criteria = [
+            "Cumprimento de metas",
+            "Proatividade e iniciativa", 
+            "Espírito de equipe e colaboração",
+            "Resolução de problemas",
+            "Criatividade e inovação",
+            "Destaque em atendimento ao cliente",
+            "Superação e crescimento profissional"
+        ];
+
+        let currentStep = 1;
+        let selectedTeam = '';
+        let evaluations = {};
+        let evaluationData = [];
+
+        function updateProgress() {
+            const progress = (currentStep - 1) / 4 * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+        }
+
+        function nextStep() {
+            if (validateCurrentStep()) {
+                if (currentStep === 1) {
+                    selectedTeam = document.getElementById('teamSelect').value;
+                    generateEvaluationForms();
+                } else if (currentStep === 2) {
+                    if (!validateAllEvaluations()) {
+                        alert('Por favor, avalie todos os funcionários da sua equipe antes de continuar.');
+                        return;
+                    }
+                } else if (currentStep === 4) {
+                    // Última etapa antes da submissão
+                    currentStep++;
+                    showStep();
+                    return;
+                }
+                
+                if (currentStep < 4) {
+                    currentStep++;
+                    showStep();
+                    if (currentStep === 4) {
+                        generateSummary();
+                    }
+                }
+            }
+        }
+
+        function previousStep() {
+            if (currentStep > 1) {
+                currentStep--;
+                showStep();
+            }
+        }
+
+        function showStep() {
+            document.querySelectorAll('.step').forEach(step => step.classList.remove('active'));
+            document.getElementById('step' + currentStep).classList.add('active');
+            updateProgress();
+        }
+
+        function validateCurrentStep() {
+            if (currentStep === 1) {
+                return document.getElementById('teamSelect').value !== '';
+            }
+            return true;
+        }
+
+        function validateAllEvaluations() {
+            const teamEmployees = employees[selectedTeam];
+            for (let employee of teamEmployees) {
+                if (!evaluations[employee]) {
+                    return false;
+                }
+                for (let criterion of criteria) {
+                    if (!evaluations[employee][criterion]) {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+
+        function generateEvaluationForms() {
+            const container = document.getElementById('evaluationContainer');
+            const teamEmployees = employees[selectedTeam];
+            
+            container.innerHTML = '';
+            
+            teamEmployees.forEach(employee => {
+                const employeeCard = document.createElement('div');
+                employeeCard.className = 'employee-card';
+                
+                let criteriaHTML = '';
+                criteria.forEach(criterion => {
+                    criteriaHTML += `
+                        <div class="criteria-item">
+                            <div class="criteria-label">${criterion}</div>
+                            <div class="star-rating" data-employee="${employee}" data-criterion="${criterion}">
+                                ${[1,2,3,4,5].map(i => `<span class="star" data-rating="${i}">★</span>`).join('')}
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                employeeCard.innerHTML = `
+                    <div class="employee-name">${employee}</div>
+                    <div class="criteria-grid">
+                        ${criteriaHTML}
+                    </div>
+                `;
+                
+                container.appendChild(employeeCard);
+            });
+            
+            // Adicionar event listeners para as estrelas
+            document.querySelectorAll('.star-rating').forEach(rating => {
+                const stars = rating.querySelectorAll('.star');
+                const employee = rating.getAttribute('data-employee');
+                const criterion = rating.getAttribute('data-criterion');
+                
+                stars.forEach(star => {
+                    star.addEventListener('click', () => {
+                        const rating_value = parseInt(star.getAttribute('data-rating'));
+                        
+                        if (!evaluations[employee]) {
+                            evaluations[employee] = {};
+                        }
+                        evaluations[employee][criterion] = rating_value;
+                        
+                        // Atualizar visual das estrelas
+                        stars.forEach((s, index) => {
+                            s.classList.toggle('active', index < rating_value);
+                        });
+                    });
+                    
+                    star.addEventListener('mouseenter', () => {
+                        const hoverRating = parseInt(star.getAttribute('data-rating'));
+                        stars.forEach((s, index) => {
+                            s.style.color = index < hoverRating ? '#ffd700' : '#ddd';
+                        });
+                    });
+                    
+                    star.addEventListener('mouseleave', () => {
+                        const currentRating = evaluations[employee] && evaluations[employee][criterion] || 0;
+                        stars.forEach((s, index) => {
+                            s.style.color = index < currentRating ? '#ffd700' : '#ddd';
+                        });
+                    });
+                });
+            });
+        }
+
+        function generateSummary() {
+            const container = document.getElementById('summaryContainer');
+            const teamEmployees = employees[selectedTeam];
+            
+            let summaryHTML = `<div class="summary">
+                <h3>Equipe: ${selectedTeam}</h3>
+            </div>`;
+            
+            teamEmployees.forEach(employee => {
+                if (evaluations[employee]) {
+                    let totalScore = 0;
+                    let criteriaHTML = '';
+                    
+                    criteria.forEach(criterion => {
+                        const score = evaluations[employee][criterion] || 0;
+                        totalScore += score;
+                        criteriaHTML += `
+                            <div class="summary-item">
+                                <span>${criterion}</span>
+                                <span>${'★'.repeat(score)}${'☆'.repeat(5-score)}</span>
+                            </div>
+                        `;
+                    });
+                    
+                    const averageScore = (totalScore / criteria.length).toFixed(1);
+                    
+                    summaryHTML += `
+                        <div class="summary">
+                            <h3>${employee} - Média: ${averageScore}/5.0</h3>
+                            ${criteriaHTML}
+                        </div>
+                    `;
+                }
+            });
+            
+            const observations = document.getElementById('observations').value;
+            if (observations.trim()) {
+                summaryHTML += `
+                    <div class="summary">
+                        <h3>Observações</h3>
+                        <p>${observations}</p>
+                    </div>
+                `;
+            }
+            
+            container.innerHTML = summaryHTML;
+        }
+
+function submitEvaluation() {
+    // URL que você copiou do Google Apps Script
+    const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbz9u-zRTaAKEXuhumFcjDmS1WsUfwoss38_1r4lGMkrJ4ZI_h-pd3tmBLKVmm9dtQWsnA/exec'; 
+
+    // 1. Preparar os dados (o mesmo código que você já tinha)
+    evaluationData = [];
+    const teamEmployees = employees[selectedTeam];
+    const evaluatorTeam = selectedTeam;
+    const timestamp = new Date().toISOString();
+    const observations = document.getElementById('observations').value.replace(/,/g, ';'); // Troca vírgulas por ponto e vírgula para evitar quebras no CSV (caso o script não faça isso)
+
+    teamEmployees.forEach(employee => {
+        // ... (o restante da preparação de dados, como antes)
+        if (evaluations[employee]) {
+            let totalScore = 0;
+            const row = {
+                'Data_Avaliacao': timestamp,
+                'Equipe_Avaliador': evaluatorTeam,
+                'Funcionario_Avaliado': employee,
+                'Equipe_Avaliado': selectedTeam
+            };
+            
+            criteria.forEach(criterion => {
+                const score = evaluations[employee][criterion] || 0;
+                totalScore += score;
+                // Usa replace para criar chaves consistentes com os cabeçalhos da planilha
+                row[criterion.replace(/\s+/g, '_')] = score; 
+            });
+            
+            row['Pontuacao_Total'] = totalScore;
+            row['Media'] = (totalScore / criteria.length).toFixed(2);
+            row['Observacoes'] = observations;
+            
+            evaluationData.push(row);
+        }
+    });
+
+    // 2. ENVIAR DADOS PARA O GOOGLE APPS SCRIPT
+    fetch(WEB_APP_URL, {
+        method: 'POST',
+        mode: 'cors', // Necessário para solicitações entre domínios (GitHub Pages -> Google)
+        headers: {
+            'Content-Type': 'text/plain;charset=utf-8', // Apps Script prefere 'text/plain' para evitar pré-voo CORS
+        },
+        body: JSON.stringify(evaluationData) // Envia o array de dados como JSON
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('A resposta da rede não foi OK: ' + response.statusText);
+        }
+        return response.json();
+    })
+    .then(result => {
+        console.log('Sucesso:', result);
+        // Avança para a tela de confirmação após o envio bem-sucedido
+        currentStep = 5;
+        showStep();
+    })
+    .catch(error => {
+        console.error('Erro ao enviar a avaliação:', error);
+        alert('Ocorreu um erro ao enviar sua avaliação. Por favor, tente novamente ou entre em contato com o suporte.');
+        // Opcional: Se falhar, você pode ainda oferecer o download local (como um backup)
+        // downloadCSV(); 
+    });
+}
+
+        function downloadCSV() {
+            if (evaluationData.length === 0) {
+                alert('Nenhum dado para exportar!');
+                return;
+            }
+            
+            const headers = Object.keys(evaluationData[0]);
+            let csvContent = headers.join(',') + '\n';
+            
+            evaluationData.forEach(row => {
+                const values = headers.map(header => {
+                    let value = row[header] || '';
+                    if (typeof value === 'string' && value.includes(',')) {
+                        value = '"' + value.replace(/"/g, '""') + '"';
+                    }
+                    return value;
+                });
+                csvContent += values.join(',') + '\n';
+            });
+            
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            const url = URL.createObjectURL(blob);
+            link.setAttribute('href', url);
+            link.setAttribute('download', `avaliacao_funcionarios_${selectedTeam}_${new Date().toISOString().slice(0,10)}.csv`);
+            link.style.visibility = 'hidden';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        function resetForm() {
+            currentStep = 1;
+            selectedTeam = '';
+            evaluations = {};
+            evaluationData = [];
+            document.getElementById('teamSelect').value = '';
+            document.getElementById('observations').value = '';
+            showStep();
+        }
+
+        // Inicializar
+        updateProgress();
+    </script>
+</body>
+</html>
